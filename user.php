@@ -84,7 +84,8 @@
 
                         <h2>新規に貸出</h2>
                         <?php
-                            while($i<=$rental->bookcount+$_SESSION['availablerental']){
+                            $i = 1;
+                            while($i <= $_SESSION['availablerental']){                            
                                 print $i;
                                 print "<input name=\"".$i."\" type=\"text\">";
                                 $i++;
