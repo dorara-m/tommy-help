@@ -6,6 +6,7 @@ if(isset($_COOKIE[session_name()])==true)
     setcookie(session_name(), '', time()-42000,'/');
 }
 session_destroy();
+header('Location: input.html');
 ?>
 <!DOCTYPE html PUBLIC "-W3C//DTD HTML 4.01 Transitional//EN">
 <html>
