@@ -7,20 +7,20 @@
     </head>
     <body>
         <?php
-        // require_once('class.php');
-        // session_start();
-        // print '<a href="logout.php">ログアウト</a><br/>';
-        // if(!isset($_SESSION['login'])){
-        // print 'ログインしなおしてください';
-        // print '<form>';
-        // print '<input type="button" onclick="history.back()" value="戻る">';
-        // print '</form>';
-        // exit(1);
-        // }
-        // $user = unserialize($_SESSION['user']);
-        // $rental = unserialize($_SESSION['rental']);
-        // $confirm = $_SESSION['confirm'];
-        // print var_dump($confirm);
+        require_once('class.php');
+        session_start();
+        print '<a href="logout.php">ログアウト</a><br/>';
+        if(!isset($_SESSION['login'])){
+        print 'ログインしなおしてください';
+        print '<form>';
+        print '<input type="button" onclick="history.back()" value="戻る">';
+        print '</form>';
+        exit(1);
+        }
+        $user = unserialize($_SESSION['user']);
+        $rental = unserialize($_SESSION['rental']);
+        $confirm = $_SESSION['confirm'];
+        print var_dump($confirm);
         ?>
         <div class="l-wrap">
             <header class="l-header">
