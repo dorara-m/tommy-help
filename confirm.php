@@ -21,15 +21,9 @@
         $rental = unserialize($_SESSION['rental']);
         $confirm = $_SESSION['confirm'];
         $confirmnew = $_SESSION['confirmnew'];
-        print var_dump($confirm);
-        print var_dump($confirmnew);
+        //print var_dump($confirm);
+        //print var_dump($confirmnew);
         ?>
-<<<<<<< HEAD
-        <form action="check_user_class.php" method="post">
-          <input name="url" type="hidden" value="complete">
-          <input type="submit" value="このIDで検索する" class="c-submit">
-        </form>
-=======
         <div class="l-wrap">
             <header class="l-header">
                 <div class="l-container">
@@ -48,18 +42,19 @@
                                 <th>貸出期限</th>
                             </tr>
                             <!-- 以下、trごとループする -->
-                            <tr>
-                                <td>1</td>
-                                <td>10002</td>
-                                <td>進撃の巨人 1巻</td>
-                                <td>2019-01-01</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>10002</td>
-                                <td>進撃の巨人 1巻</td>
-                                <td>2019-01-01</td>
-                            </tr>
+                            <?php
+                            $i = 1;
+                            foreach($confirm as $array){
+                                $html = "<tr>";
+                                $html .= "<td>".$i."</td>";
+                                $html .= "<td>".$array['rental']->bookcode."</td>";
+                                $html .= "<td>".$array['rental']->book->booktitle."</td>";
+                                $html .= "<td>".$array['rental']->schreturn."</td>";
+                                $html .= "</tr>";
+                                $i++;
+                            }
+                            print $html;
+                            ?>
                         </table>
                     </section>
                     <section>
@@ -72,25 +67,27 @@
                                 <th>貸出期限</th>
                             </tr>
                             <!-- 以下、trごとループする -->
-                            <tr>
-                                <td>1</td>
-                                <td>10002</td>
-                                <td>進撃の巨人 1巻</td>
-                                <td>2019-01-01</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>10002</td>
-                                <td>進撃の巨人 1巻</td>
-                                <td>2019-01-01</td>
-                            </tr>
+                            <?php
+                            $i = 1;
+                            foreach($confirmnew as $array){
+                                $html = "<tr>";
+                                $html .= "<td>".$i."</td>";
+                                $html .= "<td>".$array['book']->bookcode."</td>";
+                                $html .= "<td>".$array['book']->booktitle."</td>";
+                                $html .= "<td>".$array['schreturn']."</td>";
+                                $html .= "</tr>";
+                                $i++;
+                            }
+                            print $html;
+                            ?>
                         </table>
                     </section>
                     <div class="confirm-area">
                         <p>以上の内容で送信しますか？</p>
                         <div class="btns">
                             <a href="./user.php" class="c-submit__disable">キャンセル</a>
-                            <form action="">
+                            <form action="check_user_class.php" method="post">
+                                <input name="url" type="hidden" value="complete">
                                 <input type="submit" value="送信" class="c-submit">
                             </form>
                         </div>
@@ -98,6 +95,5 @@
                 </div>
             </div>
         </div>
->>>>>>> 4240935054775882b83f5098a51a512f7be40d3d
     </body>
 </html>
