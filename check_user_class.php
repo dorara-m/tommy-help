@@ -74,7 +74,7 @@
                 //if($rental->{'rental'.$i}->isreturn == FALSE){//貸出期間超過の確認//}
 
                 if($rental->{'rental'.$i}->exthistory){
-                    print $i."番目の書籍が延長できません";
+                    print "<p>書籍が延長できません<p>";
                     print '<br/>';
                 }
 
@@ -86,7 +86,7 @@
                 $availablerental = 12 - $rental->bookcount;
             }
             if($availablerental==0){
-                $_SESSION['caution'] .= "貸出上限に達しています";
+                $_SESSION['caution'] .= "<p>貸出上限に達しています<p>";
             }
             $_SESSION['availablerental'] = $availablerental;
 
@@ -125,10 +125,10 @@
             //2.1.3 図書IDの入力有無をチェック
             $chkcode = 0;
 
-            for($i=$rental->bookcount+1;$i <= $_SESSION['availablerental'];$i++){
+            for($i=$rental->bookcount+1;$i <= $rental->bookcount+$_SESSION['availablerental'];$i++){
                 if(isset($number)){
                     if($number[$i] == $chkcode){
-                        $_SESSION['caution'] .= "IDが重複しています";
+                        $_SESSION['caution'] .= "<p>#".$i."IDが重複しています<p>";
                         header('Location: user.php');
                         exit(1);
                     }
@@ -136,8 +136,8 @@
                 }
             }
             if($chkcode = 0){//入力がなかった場合処理を止める
-                if(!isset($extends)){
-                    $_SESSION['caution'] .= "入力がありません"; 
+                if(empty($extends)){
+                    $_SESSION['caution'] .= "<p>入力がありません<p>"; 
                     header('Location: user.php');
                     exit(1);
                 }
@@ -160,19 +160,19 @@
 
             //2.1.5 図書情報登録の有無をチェック
                 if(is_null($confirm[$i]['book'])){
-                    $_SESSION['caution'] .= "#".$i."指定された図書IDは存在しません"; 
+                    $_SESSION['caution'] .= "<p>#".$i."指定された図書IDは存在しません<p>"; 
                     header('Location: user.php');
                     continue;
                 }
             //2.1.6 貸出可能な図書かチェック 学生の場合は雑誌は不可
                 if($user->rank == "学生" && $confirm[$i]['book']->booktype == 1){
-                    $_SESSION['caution'] .= "#".$i."学生会員は雑誌の貸し出しができません"; 
+                    $_SESSION['caution'] .= "<p>#".$i."学生会員は雑誌の貸し出しができません<p>"; 
                     header('Location: user.php');
                     continue;
                 }
             //2.1.6.2 貸出中の図書か確認
                 if($confirm[$i]['book']->bookstat){
-                    $_SESSION['caution'] .= "#".$i."指定された図書は貸出中です"; 
+                    $_SESSION['caution'] .= "<p>#".$i."指定された図書は貸出中です<p>"; 
                     header('Location: user.php');
                     continue;
                 }
@@ -186,7 +186,7 @@
                     $confirm[$i]['reservation'] = $reservation->checkusercode($user->usercode);
                     //該当するレコードが存在しない場合、エラーを表示
                     if(empty($confirm[$i]['reservation'])){
-                        $_SESSION['caution'] .= "#".$i."指定された図書は他の人が予約中です"; 
+                        $_SESSION['caution'] .= "<p>#".$i."指定された図書は他の人が予約中です<p>"; 
                         header('Location: user.php');
                         continue;
                     }

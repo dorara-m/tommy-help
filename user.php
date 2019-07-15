@@ -28,7 +28,7 @@
         if(isset($_SESSION['caution'])){
             print $_SESSION['caution'];
             print '<br/>';
-            print var_dump($_SESSION['rec']);
+            //print var_dump($_SESSION['rec']);
         }
         $user = unserialize($_SESSION['user']);
         $rental = unserialize($_SESSION['rental']);
