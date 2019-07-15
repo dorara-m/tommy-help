@@ -162,11 +162,13 @@ body {
       }
     }
     > .input {
-      display: block;
-      width: 300px;
-      margin-top: 10px;
-      padding: 5px;
-      font-size: 16px;
+      > input {
+        display: block;
+        width: 300px;
+        margin-top: 10px;
+        padding: 5px;
+        font-size: 16px;
+      }
     }
     > .c-submit {
       margin-top: 40px;

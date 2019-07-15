@@ -176,7 +176,7 @@ body a {
   font-weight: bold;
 }
 
-.p-user form > .input {
+.p-user form > .input > input {
   display: block;
   width: 300px;
   margin-top: 10px;
