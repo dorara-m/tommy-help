@@ -57,6 +57,9 @@ body {
   letter-spacing: 0.06em;
   color: #444;
   font-family: serif;
+  a {
+    color: inherit;
+  }
 }
 .l-wrap {
 }
@@ -81,11 +84,27 @@ body {
   }
 }
 
+.c-submit {
+  display: block;
+  border: none;
+  background-color: $color-main;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px 15px;
+  margin-top: 10px;
+  font-family: sans-serif;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: opacity .5s;
+  &:hover {
+    opacity: .6;
+  }
+}
+
 // input-page-css
 .p-input {
   p {
     margin-top: 50px;
-    font-family: serif;
   }
   form {
     margin-top: 80px;
@@ -97,16 +116,68 @@ body {
       width: 300px;
       padding: 5px;
     }
-    > .submit {
-      border: none;
-      background-color: $color-main;
-      color: #fff;
-      font-size: 16px;
-      padding: 5px 15px;
-      margin-top: 10px;
-      font-family: sans-serif;
-      letter-spacing: 0.06em;
+  }
+}
+
+.p-user {
+  position: relative;
+  h2 {
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    &::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-top: 2px solid $color-main;
+      border-left: 2px solid $color-main;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%) rotate(135deg);
     }
+  }
+  form {
+    margin-top: 50px;
+    width: 100%;
+    > table {
+      font-family: sans-serif;
+      font-size: 16px;
+      width: 100%;
+      border-collapse: collapse;
+      th,td {
+        border: 1px solid #444;
+        text-align: left;
+        padding: 5px;
+      }
+      label {
+        cursor: pointer;
+      }
+      th {
+        background-color: #ccc;
+        font-weight: bold;
+      }
+    }
+    > .input {
+      display: block;
+      width: 300px;
+      margin-top: 10px;
+      padding: 5px;
+      font-size: 16px;
+    }
+    > .c-submit {
+      margin-top: 40px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+  .logout {
+    position: absolute;
+    top: 30px;
+    right: 50px;
   }
 }
 

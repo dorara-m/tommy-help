@@ -60,6 +60,10 @@ body {
   font-family: serif;
 }
 
+body a {
+  color: inherit;
+}
+
 .l-container {
   max-width: 800px;
   margin: 0 auto;
@@ -84,9 +88,26 @@ body {
   margin-bottom: 30px;
 }
 
+.c-submit {
+  display: block;
+  border: none;
+  background-color: #5598db;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px 15px;
+  margin-top: 10px;
+  font-family: sans-serif;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: opacity .5s;
+}
+
+.c-submit:hover {
+  opacity: .6;
+}
+
 .p-input p {
   margin-top: 50px;
-  font-family: serif;
 }
 
 .p-input form {
@@ -103,13 +124,74 @@ body {
   padding: 5px;
 }
 
-.p-input form > .submit {
-  border: none;
-  background-color: #5598db;
-  color: #fff;
-  font-size: 16px;
-  padding: 5px 15px;
-  margin-top: 10px;
+.p-user {
+  position: relative;
+}
+
+.p-user h2 {
+  font-size: 20px;
+  font-weight: bold;
+  position: relative;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+
+.p-user h2::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #5598db;
+  border-left: 2px solid #5598db;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%) rotate(135deg);
+}
+
+.p-user form {
+  margin-top: 50px;
+  width: 100%;
+}
+
+.p-user form > table {
   font-family: sans-serif;
-  letter-spacing: 0.06em;
+  font-size: 16px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.p-user form > table th, .p-user form > table td {
+  border: 1px solid #444;
+  text-align: left;
+  padding: 5px;
+}
+
+.p-user form > table label {
+  cursor: pointer;
+}
+
+.p-user form > table th {
+  background-color: #ccc;
+  font-weight: bold;
+}
+
+.p-user form > .input {
+  display: block;
+  width: 300px;
+  margin-top: 10px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.p-user form > .c-submit {
+  margin-top: 40px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.p-user .logout {
+  position: absolute;
+  top: 30px;
+  right: 50px;
 }
