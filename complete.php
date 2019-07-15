@@ -8,7 +8,11 @@
   <link rel="stylesheet" type="text/css" media="screen" href="./assets/main.css">
 </head>
 <body>
-  <?php session_start();?>
+  <?php 
+  require_once('class.php');
+  session_start();
+  $user = unserialize($_SESSION['user']);
+  ?>
   <div class="l-wrap">
     <header class="l-header">
       <div class="l-container">
@@ -19,7 +23,9 @@
       <div class="l-container">
         <h1>ユーザー検索画面</h1>
         <p>登録を受け付けました</p>
-        <form action="user.php" method="post">
+        <form action="check_user_class.php" method="post">
+          <input name="usercode" type="hidden" value="<?php print $user->usercode;?>">
+          <input name="url" type="hidden" value="userinput">
           <input type="submit" value="続けて入力する" class="c-submit">
         </form>
         <form action="logout.php" method="post">

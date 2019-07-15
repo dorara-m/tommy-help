@@ -33,19 +33,22 @@
             <div class="p-confirm l-content">
                 <div class="l-container">
                     <section>
-                        <h2 class="c-title">延長する図書</h2>
-                        <table class="c-table">
-                            <tr>
-                                <th>id</th>
-                                <th>図書番号</th>
-                                <th>タイトル</th>
-                                <th>貸出期限</th>
-                            </tr>
-                            <!-- 以下、trごとループする -->
-                            <?php
+                        <?php
+                        $html = "";
+                        if(!empty($confirm)){
+                            $html .= "<h2 class=\"c-title\">延長する図書</h2>";
+                            $html .= "<table class=\"c-table\">";
+
+                                $html .= "<tr>";
+                                $html .= "<th>id</th>";
+                                $html .= "<th>図書番号</th>";
+                                $html .= "<th>タイトル</th>";
+                                $html .= "<th>貸出期限</th>";
+                                $html .= "</tr>";
+                            
                             $i = 1;
                             foreach($confirm as $array){
-                                $html = "<tr>";
+                                $html .= "<tr>";
                                 $html .= "<td>".$i."</td>";
                                 $html .= "<td>".$array['rental']->bookcode."</td>";
                                 $html .= "<td>".$array['rental']->book->booktitle."</td>";
@@ -54,23 +57,26 @@
                                 $i++;
                             }
                             print $html;
+                            }
                             ?>
                         </table>
                     </section>
                     <section>
-                        <h2 class="c-title">新規貸出の図書</h2>
-                        <table class="c-table">
-                            <tr>
-                                <th>id</th>
-                                <th>図書番号</th>
-                                <th>タイトル</th>
-                                <th>貸出期限</th>
-                            </tr>
-                            <!-- 以下、trごとループする -->
-                            <?php
+                        <?php
+                        $html = "";
+                        if(!empty($confirmnew)){
+                            $html .= "<h2 class=\"c-title\">新規貸出の図書</h2>";
+                            $html .= "<table class=\"c-table\">";
+                                $html .= "<tr>";
+                                $html .= "<th>id</th>";
+                                $html .= "<th>図書番号</th>";
+                                $html .= "<th>タイトル</th>";
+                                $html .= "<th>貸出期限</th>";
+                                $html .= "</tr>";
+                                                     
                             $i = 1;
                             foreach($confirmnew as $array){
-                                $html = "<tr>";
+                                $html .= "<tr>";
                                 $html .= "<td>".$i."</td>";
                                 $html .= "<td>".$array['book']->bookcode."</td>";
                                 $html .= "<td>".$array['book']->booktitle."</td>";
@@ -78,17 +84,19 @@
                                 $html .= "</tr>";
                                 $i++;
                             }
+                            $html .= "</table>";
                             print $html;
+                            }
                             ?>
-                        </table>
+                        
                     </section>
                     <div class="confirm-area">
-                        <p>以上の内容で送信しますか？</p>
+                        <p>以上の内容で登録しますか？</p>
                         <div class="btns">
                             <a href="./user.php" class="c-submit__disable">キャンセル</a>
                             <form action="check_user_class.php" method="post">
                                 <input name="url" type="hidden" value="complete">
-                                <input type="submit" value="送信" class="c-submit">
+                                <input type="submit" value="登録" class="c-submit">
                             </form>
                         </div>
                     </div>
