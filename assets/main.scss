@@ -83,7 +83,43 @@ body {
     margin-bottom: 30px;
   }
 }
-
+.c-title {
+  font-size: 20px;
+  font-weight: bold;
+  position: relative;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  &::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid $color-main;
+    border-left: 2px solid $color-main;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%) rotate(135deg);
+  }
+}
+.c-table {
+  font-family: sans-serif;
+  font-size: 16px;
+  width: 100%;
+  border-collapse: collapse;
+  th,td {
+    border: 1px solid #444;
+    text-align: left;
+    padding: 5px;
+  }
+  label {
+    cursor: pointer;
+  }
+  th {
+    background-color: #ccc;
+    font-weight: bold;
+  }
+}
 .c-submit {
   display: block;
   border: none;
@@ -99,6 +135,10 @@ body {
   &:hover {
     opacity: .6;
   }
+}
+.c-submit__disable {
+  @extend .c-submit;
+  background-color: #bbb;
 }
 
 // input-page-css
@@ -137,53 +177,17 @@ body {
       }
     }
   }
-  h2 {
-    font-size: 20px;
-    font-weight: bold;
-    position: relative;
-    margin-top: 25px;
-    margin-bottom: 10px;
-    padding-left: 20px;
-    &::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-top: 2px solid $color-main;
-      border-left: 2px solid $color-main;
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%) rotate(135deg);
-    }
-  }
+  
   form {
     margin-top: 50px;
     width: 100%;
-    > table {
-      font-family: sans-serif;
-      font-size: 16px;
-      width: 100%;
-      border-collapse: collapse;
-      th,td {
-        border: 1px solid #444;
-        text-align: left;
-        padding: 5px;
-      }
-      label {
-        cursor: pointer;
-      }
-      th {
-        background-color: #ccc;
-        font-weight: bold;
-      }
-    }
     > .input {
+      margin-top: 10px;
+      font-size: 16px;
       > input {
-        display: block;
+        display: inline-block;
         width: 300px;
-        margin-top: 10px;
         padding: 5px;
-        font-size: 16px;
       }
     }
     > .c-submit {
@@ -201,7 +205,21 @@ body {
 }
 
 .p-confirm {
-  h2 {
-    color: red;
+  .confirm-area {
+    margin-top: 60px;
+    > p {
+      text-align: center;
+      font-weight: bold;
+    }
+    > .btns {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      > a {
+        text-decoration: none;
+        margin-right: 20px;
+      }
+    } 
   }
 }

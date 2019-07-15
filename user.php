@@ -59,9 +59,9 @@
                         }
                     ?>
                     <form method="post" action="check_user_class.php">
-                        <h2>貸出済み</h2>
+                        <h2 class="c-title">貸出済み</h2>
                         <!-- レンタルの数だけ貸出明細情報を表示-->
-                        <table>
+                        <table class="c-table">
                             <tr>
                                 <th>id</th>
                                 <th>図書番号</th>
@@ -88,7 +88,7 @@
                             ?>
                         </table>
 
-                        <h2>新規に貸出</h2>
+                        <h2 class="c-title">新規に貸出</h2>
                         <?php
                             $i = 1;
                             $htmlNew = "";

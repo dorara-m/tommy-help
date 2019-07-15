@@ -19,8 +19,8 @@
         <h1>[太郎]さんの貸出画面</h1>
         <div class="caution">1 重複エラー</div>
         <form action="">
-          <h2>貸出済み</h2>
-          <table>
+          <h2 class="c-title">貸出済み</h2>
+          <table class="c-table">
             <!-- タイトル -->
             <tr>
               <th>図書番号</th>
@@ -51,10 +51,20 @@
               </td>
             </tr>
           </table>
-          <h2>新規に貸出</h2>
-          <input type="text" class="input">
-          <input type="text" class="input">
-          <input type="text" class="input">
+          <h2 class="c-title">新規に貸出</h2>
+          <div class="input">
+            <span>1.</span>
+            <input type="text" class="input">
+          </div>
+          <div class="input">
+            <span>1.</span>
+            <input type="text" class="input">
+          </div>
+          <div class="input">
+            <span>1.</span>
+            <input type="text" class="input">
+          </div>
+          
           <input type="submit" value="この内容で登録" class="c-submit">
         </form>
         <div class="logout">
