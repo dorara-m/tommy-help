@@ -72,11 +72,11 @@
                                     $html .= "<td>".$rental->{'rental'.$i}->bookcode."</td>";
                                     $html .= "<td>".$rental->{'rental'.$i}->book->booktitle."</td>";
                                     $html .= "<td>".$rental->{'rental'.$i}->schreturn."</td>";
+                                    $html .= "<td>";
                                     if($rental->{'rental'.$i}->exthistory == 0){
-                                        $html .= "<td>";
                                         $html .= "<label><input type=\"checkbox\" name=\"extends[]\" value=".$i.">".$i."を延長する</label>";
-                                        $html .= "</td>";
                                     }
+                                    $html .= "</td>";
                                     $html .= "</tr>";
                                 }
                                 print $html;
