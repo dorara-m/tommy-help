@@ -88,7 +88,50 @@ body a {
   margin-bottom: 30px;
 }
 
-.c-submit {
+.c-title {
+  font-size: 20px;
+  font-weight: bold;
+  position: relative;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+
+.c-title::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #5598db;
+  border-left: 2px solid #5598db;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%) rotate(135deg);
+}
+
+.c-table {
+  font-family: sans-serif;
+  font-size: 16px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.c-table th, .c-table td {
+  border: 1px solid #444;
+  text-align: left;
+  padding: 5px;
+}
+
+.c-table label {
+  cursor: pointer;
+}
+
+.c-table th {
+  background-color: #ccc;
+  font-weight: bold;
+}
+
+.c-submit, .c-submit__disable {
   display: block;
   border: none;
   background-color: #5598db;
@@ -102,8 +145,12 @@ body a {
   transition: opacity .5s;
 }
 
-.c-submit:hover {
+.c-submit:hover, .c-submit__disable:hover {
   opacity: .6;
+}
+
+.c-submit__disable {
+  background-color: #bbb;
 }
 
 .p-input p {
@@ -128,25 +175,22 @@ body a {
   position: relative;
 }
 
-.p-user h2 {
-  font-size: 20px;
+.p-user .caution {
+  color: #dd3f37;
   font-weight: bold;
-  position: relative;
-  margin-top: 25px;
-  margin-bottom: 10px;
-  padding-left: 20px;
+  font-size: 20px;
+  animation: fadeIn .8s;
 }
 
-.p-user h2::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-top: 2px solid #5598db;
-  border-left: 2px solid #5598db;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%) rotate(135deg);
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .p-user form {
@@ -154,37 +198,18 @@ body a {
   width: 100%;
 }
 
-.p-user form > table {
-  font-family: sans-serif;
+.p-user form > .input {
+  margin-top: 10px;
   font-size: 16px;
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.p-user form > table th, .p-user form > table td {
-  border: 1px solid #444;
-  text-align: left;
-  padding: 5px;
-}
-
-.p-user form > table label {
-  cursor: pointer;
-}
-
-.p-user form > table th {
-  background-color: #ccc;
-  font-weight: bold;
 }
 
 .p-user form > .input > input {
-  display: block;
+  display: inline-block;
   width: 300px;
-  margin-top: 10px;
   padding: 5px;
-  font-size: 16px;
 }
 
-.p-user form > .c-submit {
+.p-user form > .c-submit, .p-user form > .c-submit__disable {
   margin-top: 40px;
   margin-right: auto;
   margin-left: auto;
@@ -194,4 +219,25 @@ body a {
   position: absolute;
   top: 30px;
   right: 50px;
+}
+
+.p-confirm .confirm-area {
+  margin-top: 60px;
+}
+
+.p-confirm .confirm-area > p {
+  text-align: center;
+  font-weight: bold;
+}
+
+.p-confirm .confirm-area > .btns {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p-confirm .confirm-area > .btns > a {
+  text-decoration: none;
+  margin-right: 20px;
 }
