@@ -93,22 +93,24 @@
         }
 
         function sequence2(){
+
             //延長貸出
             $user = unserialize($_SESSION['user']);
             $rental = unserialize($_SESSION['rental']);
             $_SESSION['caution'] = '';
             $confirm = array();
+            $confirmnew = array();
 
             $extends = array();
             $number = array();
             if (isset($_POST['extends']) && is_array($_POST['extends'])) {
-                $_POST['extends'] = $extends;
+                $extends = $_POST['extends'];
             }
             for($i=1; $i <= 12; $i++){
                 if(isset($_POST[$i]) && !($_POST[$i] == ""))
                 $number[$i] = $_POST[$i];
             }
-            print var_dump($number);
+            //print var_dump($number);
             //2.1.1 貸出明細情報の取得 rental->rental*
             if (isset($extends)) {
                 foreach( $extends as $i ){
@@ -135,7 +137,8 @@
                     $chkcode = $number[$i];
                 }
             }
-            if($chkcode = 0){//入力がなかった場合処理を止める
+
+            if($chkcode == 0){//入力がなかった場合処理を止める
                 if(empty($extends)){
                     $_SESSION['caution'] .= "<p>入力がありません<p>"; 
                     header('Location: user.php');
@@ -195,25 +198,96 @@
                 $confirmnew[$i]['schreturn'] = date("Y-m-d",strtotime("+3 week"));
             
             }
-
+            if(!$_SESSION['caution'] == ""){
+                header('Location: user.php');
+                exit();
+            }
             $_SESSION['confirm'] = $confirm;
             $_SESSION['confirmnew'] = $confirmnew;
             //print var_dump($confirm);
             //print var_dump($confirmnew);
             //print $_SESSION['caution'];
-            //header('Location: confirm.php');
+            //
 
 
 
         }
 
         function sequence3(){
+            //1.1 図書を貸し出す
+            $completenew = array();
+            $complete = array();
+            $user = unserialize($_SESSION['user']);
+            //1.1.1 図書情報を取得する
+            $complete = $_SESSION['confirm'];
+            $completenew = $_SESSION['confirmnew'];
+
+            //1.1.2 貸出明細情報を追加する
+            foreach($completenew as $array){
+                $res = array();
+                $res['usercode'] = $user->usercode;
+                $res['name'] = $user->name;
+                $res['bookcode'] = $array['book']->bookcode;
+                $res['checkoutdate'] = date('Y-m-d');
+                $res['scheduledreturndate'] = $array['schreturn'];
+                print var_dump($res);
+                print '<br/>';
+                try{
+                    $dsn = 'mysql:dbname=book;host=localhost';
+                    $user = 'root';
+                    $password = '';
+                    $dbh = new PDO($dsn, $user, $password);
+                    $dbh->query('SET NAMES utf8');
+                    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $dbh->beginTransaction();
+
+                    $stmt = $dbh->prepare('INSERT INTO rental (usercode, name, bookcode, checkoutdate, scheduledreturndate) VALUES (:usercode, :name, :bookcode, :checkoutdate, :scheduledreturndate)');
+                    $stmt->bindValue(':usercode', $res['usercode'], PDO::PARAM_INT);
+                    $stmt->bindValue(':name', $res['name'], PDO::PARAM_STR);
+                    $stmt->bindValue(':bookcode', $res['bookcode'], PDO::PARAM_INT);
+                    $stmt->bindValue(':checkoutdate', $res['checkoutdate'], PDO::PARAM_STR);
+                    $stmt->bindValue(':scheduledreturndate', $res['scheduledreturndate'], PDO::PARAM_STR);
+                    $stmt->execute();
+                    
+                    $stmt = $dbh->prepare('UPDATE book SET bookstatus = 1 WHERE bookcode = :bookcode');
+                    $stmt->bindValue(':bookcode', $res['bookcode'], PDO::PARAM_INT);
+                    $stmt->execute();
+
+                    if(!empty($array['reservation'])){
+                        $stmt = $dbh->prepare('UPDATE reservation SET isavailable = 0 WHERE reservationcode = :reservationcode');
+                        $stmt->bindValue(':reservationcode', $array['reservation']['reservationcode'], PDO::PARAM_INT);
+                        $stmt->execute();
+                    }
+
+                    $dbh->commit();
 
 
+                }catch(Excaption $e){
+                    $dbh->rollBack();
+                }
+                $dbh = null;
 
-            if(isset(${'reservation'.$i}->usercode)){
-                ${'reservation'.$i}::Deleteresv();
+                
+
             }
+
+            foreach($complete as $array){
+                if(!$array['rental']->extention())
+                $_SESSION['error'] = 'extentionerror';
+            }
+            /*$usercode,
+            $name,
+            $bookcode 
+            checkoutdate 
+            scheduledreturndate,
+            extrental 
+            exthistory 
+            returndate 
+            isreturn
+            */
+            //if(isset(${'reservation'.$i}->usercode)){
+            //    ${'reservation'.$i}::Deleteresv();
+            //}
             
         }
         
@@ -237,6 +311,10 @@
 
             //print var_dump($number);
             sequence2();
+            header('Location: confirm.php');
+        }elseif($url == 'complete'){
+            sequence3();
+            header('Location: complete.php');
         }
         //リダイレクトにはheader();を使う
 

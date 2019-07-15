@@ -19,7 +19,13 @@
         $user = unserialize($_SESSION['user']);
         $rental = unserialize($_SESSION['rental']);
         $confirm = $_SESSION['confirm'];
+        $confirmnew = $_SESSION['confirmnew'];
         print var_dump($confirm);
+        print var_dump($confirmnew);
         ?>
+        <form action="check_user_class.php" method="post">
+          <input name="url" type="hidden" value="complete">
+          <input type="submit" value="このIDで検索する" class="c-submit">
+        </form>
     </body>
 </html>

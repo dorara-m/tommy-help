@@ -127,6 +127,7 @@ class RentalDetail
     @return obj rental*
     property:
     */
+    public $rentalcode;
     public $chkout; //貸出日
     public $schreturn;//返却予定日
     public $extrental;//延長希望
@@ -134,6 +135,26 @@ class RentalDetail
     public $return;//返却日
     public $bookcode;//図書ID
     public $book;//図書情報オブジェクト
+
+    function extention(){
+        try{
+            print $this->rentalcode;
+            $dsn = 'mysql:dbname=book;host=localhost';
+            $user = 'root';
+            $password = '';
+            $dbh = new PDO($dsn, $user, $password);
+            $dbh->query('SET NAMES utf8');
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+            $stmt = $dbh->prepare('UPDATE rental SET exthistory = 1, scheduledreturndate = :schreturn  WHERE rentalcode = :rentalcode');
+            $stmt->bindValue(':rentalcode', $this->rentalcode, PDO::PARAM_INT);
+            $stmt->bindValue(':schreturn', $this->schreturn, PDO::PARAM_STR);
+            $stmt->execute();
+        }catch(Exception $e){
+            return false;
+        }
+        return true;
+    }
 
     final private function __construct() {}
 
@@ -143,13 +164,23 @@ class RentalDetail
      * @return self|null
      */
     final public static function create($rentalcode)
-        {
-            // 自分自身のインスタンス生成
-            $instance = new self();
-    
-            // インスタンス初期化メソッド呼び出し、失敗時はnullを返す
-            return $instance->init($rentalcode) ? $instance : null;
-        }
+    {
+        // 自分自身のインスタンス生成
+        $instance = new self();
+
+        // インスタンス初期化メソッド呼び出し、失敗時はnullを返す
+        return $instance->init($rentalcode) ? $instance : null;
+    }
+    /*
+    final public static function createresister($rentalcode)
+    {
+        // 自分自身のインスタンス生成
+        $instance = new self();
+
+        // インスタンス初期化メソッド呼び出し、失敗時はnullを返す
+        return $instance->init($rentalcode) ? $instance : null;
+    }
+    */
     
         /**
          * インスタンス初期化処理
@@ -173,7 +204,7 @@ class RentalDetail
             {
                 return false;
             }
-
+            $this->rentalcode = $rec['rentalcode'];
             $this->chkout = $rec['checkoutdate'];
             $this->schreturn = $rec['scheduledreturndate'];
             $this->extrental = $rec['extrental'];
