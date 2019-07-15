@@ -18,28 +18,27 @@
             // session_start();
             // print '<a href="logout.php">ログアウト</a><br/>';
 
-            // if(!isset($_SESSION['login'])){
-            //     print 'ログインしなおしてください';
-            //     print '<form>';
-            //     print '<input type="button" onclick="history.back()" value="戻る">';
-            //     print '</form>';
-            //     exit(1);
-            // }
-
-            // if(isset($_SESSION['error'])){
-            //     print $_SESSION['error'];
-            //     print '<form>';
-            //     print '<input type="button" onclick="history.back()" value="戻る">';
-            //     print '</form>';
-            //     exit(1);
-            // }
-            // if(isset($_SESSION['caution'])){
-            //     print $_SESSION['caution'];
-            //     print '<br/>';
-            //     print var_dump($_SESSION['rec']);
-            // }
-            // $user = unserialize($_SESSION['user']);
-            // $rental = unserialize($_SESSION['rental']);
+            if(!isset($_SESSION['login'])){
+                print 'ログインしなおしてください';
+                print '<form>';
+                print '<input type="button" onclick="history.back()" value="戻る">';
+                print '</form>';
+                exit(1);
+            }
+            if(isset($_SESSION['error'])){
+                print $_SESSION['error'];
+                print '<form>';
+                print '<input type="button" onclick="history.back()" value="戻る">';
+                print '</form>';
+                exit(1);
+            }
+            if(isset($_SESSION['caution'])){
+                print $_SESSION['caution'];
+                print '<br/>';
+                //print var_dump($_SESSION['rec']);
+            }
+            $user = unserialize($_SESSION['user']);
+            $rental = unserialize($_SESSION['rental']);
             /*テスト
             print var_dump($rental);
             print '<br />'; 
