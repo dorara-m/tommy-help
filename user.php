@@ -67,17 +67,17 @@
                             <?php
                                 for($i=1;$i <= $rental->bookcount; $i++){
                                     $html = "";
-                                    $html = "<tr>";
-                                    $html = "<td>".$i."</td>";
-                                    $html = "<td>".$rental->{'rental'.$i}->bookcode."</td>";
-                                    $html = "<td>".$rental->{'rental'.$i}->book->booktitle."</td>";
-                                    $html = "<td>".$rental->{'rental'.$i}->schreturn."</td>";
+                                    $html .= "<tr>";
+                                    $html .= "<td>".$i."</td>";
+                                    $html .= "<td>".$rental->{'rental'.$i}->bookcode."</td>";
+                                    $html .= "<td>".$rental->{'rental'.$i}->book->booktitle."</td>";
+                                    $html .= "<td>".$rental->{'rental'.$i}->schreturn."</td>";
                                     if($rental->{'rental'.$i}->exthistory == 0){
-                                        $html = "<td><label><input type=\"checkbox\" name=\"extends[]\" value=".$i.">".$i."を延長する</label></td>";
+                                        $html .= "<td><label><input type=\"checkbox\" name=\"extends[]\" value=".$i.">".$i."を延長する</label></td>";
                                     }
-                                    $html = "</tr>";
-                                    print $html;
+                                    $html .= "</tr>";
                                 }
+                                print $html;
                             ?>
                         </table>
 
