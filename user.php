@@ -56,7 +56,8 @@
                 }
                 print "<br/>";
             }
-            while($i<=$rental->bookcount+$_SESSION['availablerental']){
+            $i = 1;
+            while($i <= $_SESSION['availablerental']){
                 print $i;
                 print "<input name=\"".$i."\" type=\"text\" style=\"width:100px\"><br/>";
                 $i++;

@@ -85,7 +85,7 @@
             }elseif($user->rank == "教員"){
                 $availablerental = 12 - $rental->bookcount;
             }
-            if($availablerental==0){
+            if($availablerental<=0){
                 $_SESSION['caution'] .= "<p>貸出上限に達しています<p>";
             }
             $_SESSION['availablerental'] = $availablerental;
@@ -125,14 +125,14 @@
             //2.1.3 図書IDの入力有無をチェック
             $chkcode = 0;
 
-            for($i=$rental->bookcount+1;$i <= $rental->bookcount+$_SESSION['availablerental'];$i++){
-                if(isset($number)){
+            for($i = 1;$i <= $_SESSION['availablerental']; $i++){
+                if(isset($number[$i])){
                     if($number[$i] == $chkcode){
                         $_SESSION['caution'] .= "<p>#".$i."IDが重複しています<p>";
                         header('Location: user.php');
                         exit(1);
                     }
-                    $chkcode=$number[$i];
+                    $chkcode = $number[$i];
                 }
             }
             if($chkcode = 0){//入力がなかった場合処理を止める
@@ -148,56 +148,58 @@
             //print '新規貸出図書開始<br/>';
             //print var_dump($number);
             //2.1.4 図書情報の取得
-            for($i=$rental->bookcount+1;$i <= $rental->bookcount+$_SESSION['availablerental'];$i++){
+            for($i = 1; $i <= $_SESSION['availablerental']; $i++){
                 //$_SESSION['caution'] .= $number[$i];
                 if(!isset($number[$i])){
                     continue;
                 }
                 $bookcode = $number[$i];
                 //$book = Book::create($bookcode);
-                $confirm[$i]['book'] = Book::create($bookcode);
+                $confirmnew[$i]['book'] = Book::create($bookcode);
                 //$_SESSION["newbook{$i}"]=serialize(${'newbook'.$i});
 
             //2.1.5 図書情報登録の有無をチェック
-                if(is_null($confirm[$i]['book'])){
+                if(is_null($confirmnew[$i]['book'])){
                     $_SESSION['caution'] .= "<p>#".$i."指定された図書IDは存在しません<p>"; 
                     header('Location: user.php');
                     continue;
                 }
             //2.1.6 貸出可能な図書かチェック 学生の場合は雑誌は不可
-                if($user->rank == "学生" && $confirm[$i]['book']->booktype == 1){
+                if($user->rank == "学生" && $confirmnew[$i]['book']->booktype == 1){
                     $_SESSION['caution'] .= "<p>#".$i."学生会員は雑誌の貸し出しができません<p>"; 
                     header('Location: user.php');
                     continue;
                 }
             //2.1.6.2 貸出中の図書か確認
-                if($confirm[$i]['book']->bookstat){
+                if($confirmnew[$i]['book']->bookstat){
                     $_SESSION['caution'] .= "<p>#".$i."指定された図書は貸出中です<p>"; 
                     header('Location: user.php');
                     continue;
                 }
             //2.1.7 予約情報の取得　
             //print $confirm[$i]['book']->bookcatalogcode;
-                $reservation = Reservation::create($confirm[$i]['book']->bookcatalogcode);
+                $reservation = Reservation::create($confirmnew[$i]['book']->bookcatalogcode);
             //2.1.8 予約が適正かチェック
                 //予約情報が存在する場合
                 if(!empty($reservation)){
                     //会員IDに該当するレコードをconfirm配列に代入
-                    $confirm[$i]['reservation'] = $reservation->checkusercode($user->usercode);
+                    $confirmnew[$i]['reservation'] = $reservation->checkusercode($user->usercode);
                     //該当するレコードが存在しない場合、エラーを表示
-                    if(empty($confirm[$i]['reservation'])){
+                    if(empty($confirmnew[$i]['reservation'])){
                         $_SESSION['caution'] .= "<p>#".$i."指定された図書は他の人が予約中です<p>"; 
                         header('Location: user.php');
                         continue;
                     }
                 }
             //2.1.9 返却予定日を設定
-                $confirm[$i]['schreturn'] = date("Y-m-d",strtotime("+3 week"));
+                $confirmnew[$i]['schreturn'] = date("Y-m-d",strtotime("+3 week"));
             
             }
 
             $_SESSION['confirm'] = $confirm;
+            $_SESSION['confirmnew'] = $confirmnew;
             //print var_dump($confirm);
+            //print var_dump($confirmnew);
             //print $_SESSION['caution'];
             //header('Location: confirm.php');
 
