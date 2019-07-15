@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>[太郎]さんの貸出画面</title>
+        <title>貸出画面</title>
         <link rel="stylesheet" type="text/css" media="screen" href="./assets/main.css">
     </head>
     <body>
@@ -16,7 +16,6 @@
             <?php
             require_once('class.php');
             session_start();
-            print '<a href="logout.php">ログアウト</a><br/>';
             if(!isset($_SESSION['login'])){
                 print 'ログインしなおしてください';
                 print '<form>';
@@ -52,7 +51,7 @@
             <!-- pageContents -->
             <div class="p-user l-content">
                 <div class="l-container">
-                    <h1>[太郎]さんの貸出画面</h1>
+                    <h1><?php print $user->name ?>さんの貸出画面</h1>
                     <form method="post" action="check_user_class.php">
                         <h2>貸出済み</h2>
                         <!-- レンタルの数だけ貸出明細情報を表示-->
@@ -97,7 +96,7 @@
                     </form>
                     
                     <div class="logout">
-                        <a href="./input.html">検索画面に戻る</a>
+                        <a href="logout.php">検索画面に戻る</a>
                     </div>
                 </div>
             </div>
