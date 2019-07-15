@@ -30,11 +30,6 @@
                 print '</form>';
                 exit(1);
             }
-            if(isset($_SESSION['caution'])){
-                print $_SESSION['caution'];
-                print '<br/>';
-                //print var_dump($_SESSION['rec']);
-            }
             $user = unserialize($_SESSION['user']);
             $rental = unserialize($_SESSION['rental']);
             /*テスト
@@ -52,6 +47,17 @@
             <div class="p-user l-content">
                 <div class="l-container">
                     <h1><?php print $user->name ?>さんの貸出画面</h1>
+                    <?php
+                        if(isset($_SESSION['caution'])){
+                            $htmlCaution = "";
+
+                            $htmlCaution .= '<div class="caution">';
+                            $htmlCaution .= $_SESSION['caution'];
+                            $htmlCaution .= '</div>';
+                            print $htmlCaution;
+                            //print var_dump($_SESSION['rec']);
+                        }
+                    ?>
                     <form method="post" action="check_user_class.php">
                         <h2>貸出済み</h2>
                         <!-- レンタルの数だけ貸出明細情報を表示-->

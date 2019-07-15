@@ -121,6 +121,22 @@ body {
 
 .p-user {
   position: relative;
+  .caution {
+    color: #dd3f37;
+    font-weight: bold;
+    font-size: 20px;
+    animation: fadeIn .8s;
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
   h2 {
     font-size: 20px;
     font-weight: bold;
@@ -181,5 +197,11 @@ body {
     top: 30px;
     right: 50px;
   }
+
 }
 
+.p-confirm {
+  h2 {
+    color: red;
+  }
+}
