@@ -14,10 +14,9 @@
             </header>
 
             <?php
-            // require_once('class.php');
-            // session_start();
-            // print '<a href="logout.php">ログアウト</a><br/>';
-
+            require_once('class.php');
+            session_start();
+            print '<a href="logout.php">ログアウト</a><br/>';
             if(!isset($_SESSION['login'])){
                 print 'ログインしなおしてください';
                 print '<form>';
