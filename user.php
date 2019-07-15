@@ -65,15 +65,17 @@
                                 <th>延長</th>
                             </tr>
                             <?php
+                                $html = "";
                                 for($i=1;$i <= $rental->bookcount; $i++){
-                                    $html = "";
                                     $html .= "<tr>";
                                     $html .= "<td>".$i."</td>";
                                     $html .= "<td>".$rental->{'rental'.$i}->bookcode."</td>";
                                     $html .= "<td>".$rental->{'rental'.$i}->book->booktitle."</td>";
                                     $html .= "<td>".$rental->{'rental'.$i}->schreturn."</td>";
                                     if($rental->{'rental'.$i}->exthistory == 0){
-                                        $html .= "<td><label><input type=\"checkbox\" name=\"extends[]\" value=".$i.">".$i."を延長する</label></td>";
+                                        $html .= "<td>";
+                                        $html .= "<label><input type=\"checkbox\" name=\"extends[]\" value=".$i.">".$i."を延長する</label>";
+                                        $html .= "</td>";
                                     }
                                     $html .= "</tr>";
                                 }
@@ -84,11 +86,15 @@
                         <h2>新規に貸出</h2>
                         <?php
                             $i = 1;
-                            while($i <= $_SESSION['availablerental']){                            
-                                print $i;
-                                print "<input name=\"".$i."\" type=\"text\">";
+                            $htmlNew = "";
+                            while($i <= $_SESSION['availablerental']){ 
+                                $htmlNew .= '<div class="input">';
+                                $htmlNew .= "<span>".$i."</span>";
+                                $htmlNew .= "<input name=\"".$i."\" type=\"text\">";
+                                $htmlNew .= "</div>";
                                 $i++;
                             }
+                            print $htmlNew;
                         ?>
 
 
