@@ -49,7 +49,64 @@ table {
 
 
 // --common
+$color-main: #5598db;
+
+body {
+  font-size: 18px;
+  line-height: 1.6;
+  letter-spacing: 0.06em;
+  color: #444;
+  font-family: serif;
+}
 .l-wrap {
+}
+.l-container {
   max-width: 800px;
   margin: 0 auto;
 }
+.l-header {
+  font-size: 20px;
+  background: -moz-linear-gradient(left, $color-main, #FFF);
+  background: -webkit-linear-gradient(left, $color-main, #FFF);
+  background: linear-gradient(to right, $color-main, #FFF);
+  color: #fff;
+  padding: 10px;
+}
+.l-content {
+  padding: 50px 0;
+  h1 {
+    font-weight: bold;
+    font-size: 38px;
+    margin-bottom: 30px;
+  }
+}
+
+// input-page-css
+.p-input {
+  p {
+    margin-top: 50px;
+    font-family: serif;
+  }
+  form {
+    margin-top: 80px;
+    > input {
+      display: block;
+    }
+    > .input {
+      font-size: 20px;
+      width: 300px;
+      padding: 5px;
+    }
+    > .submit {
+      border: none;
+      background-color: $color-main;
+      color: #fff;
+      font-size: 16px;
+      padding: 5px 15px;
+      margin-top: 10px;
+      font-family: sans-serif;
+      letter-spacing: 0.06em;
+    }
+  }
+}
+

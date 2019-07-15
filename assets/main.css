@@ -52,7 +52,64 @@ table {
   border-spacing: 0;
 }
 
-.l-wrap {
+body {
+  font-size: 18px;
+  line-height: 1.6;
+  letter-spacing: 0.06em;
+  color: #444;
+  font-family: serif;
+}
+
+.l-container {
   max-width: 800px;
   margin: 0 auto;
+}
+
+.l-header {
+  font-size: 20px;
+  background: -moz-linear-gradient(left, #5598db, #FFF);
+  background: -webkit-linear-gradient(left, #5598db, #FFF);
+  background: linear-gradient(to right, #5598db, #FFF);
+  color: #fff;
+  padding: 10px;
+}
+
+.l-content {
+  padding: 50px 0;
+}
+
+.l-content h1 {
+  font-weight: bold;
+  font-size: 38px;
+  margin-bottom: 30px;
+}
+
+.p-input p {
+  margin-top: 50px;
+  font-family: serif;
+}
+
+.p-input form {
+  margin-top: 80px;
+}
+
+.p-input form > input {
+  display: block;
+}
+
+.p-input form > .input {
+  font-size: 20px;
+  width: 300px;
+  padding: 5px;
+}
+
+.p-input form > .submit {
+  border: none;
+  background-color: #5598db;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px 15px;
+  margin-top: 10px;
+  font-family: sans-serif;
+  letter-spacing: 0.06em;
 }
