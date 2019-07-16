@@ -223,3 +223,15 @@ body {
     } 
   }
 }
+
+.p-complete {
+  .btns {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > .btn {
+      margin-right: 20px;
+    }
+  }
+}

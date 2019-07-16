@@ -241,3 +241,14 @@ body a {
   text-decoration: none;
   margin-right: 20px;
 }
+
+.p-complete .btns {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p-complete .btns > .btn {
+  margin-right: 20px;
+}

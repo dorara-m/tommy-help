@@ -19,18 +19,19 @@
         <p>図書貸出システム</p>
       </div>
     </header>
-    <div class="p-input l-content">
+    <div class="p-complete l-content">
       <div class="l-container">
-        <h1>ユーザー検索画面</h1>
-        <p>登録を受け付けました</p>
-        <form action="check_user_class.php" method="post">
-          <input name="usercode" type="hidden" value="<?php print $user->usercode;?>">
-          <input name="url" type="hidden" value="userinput">
-          <input type="submit" value="続けて入力する" class="c-submit">
-        </form>
-        <form action="logout.php" method="post">
-            <input type="submit" value="終了する" class="c-submit">
+        <p>登録を受け付けました。</p>
+        <div class="btns">
+          <form action="logout.php" method="post" class="btn">
+            <input type="submit" value="終了する" class="c-submit__disable">
           </form>
+          <form action="check_user_class.php" method="post">
+            <input name="usercode" type="hidden" value="<?php print $user->usercode;?>">
+            <input name="url" type="hidden" value="userinput">
+            <input type="submit" value="続けて入力する" class="c-submit">
+          </form>
+        </div>
       </div>
     </div>
   </div>
